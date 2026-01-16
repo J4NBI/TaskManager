@@ -3,7 +3,7 @@ import Button from "./Button";
 
 import { BsClipboard2Data } from "react-icons/bs";
 
-const EmptyProject = () => {
+const EmptyProject = ({ handleselectedproject }) => {
   return (
     <div className=" h-full w-full flex flex-col gap-6 items-center justify-center">
       <BsClipboard2Data size={70} />
@@ -11,7 +11,12 @@ const EmptyProject = () => {
       <p className="text-black/60">
         Select a project or get started with a new one
       </p>
-      <Button text="Create new project" />
+      <button
+        className="bg-black text-white/50 py-2 px-4 rounded-md hover:bg-black/40 hover:text-black transition duration-150 ease-in-out cursor-pointer"
+        onClick={handleselectedproject}
+      >
+        Create new project
+      </button>
     </div>
   );
 };

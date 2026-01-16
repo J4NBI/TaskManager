@@ -2,19 +2,17 @@ import React from "react";
 import EmptyProject from "./EmptyProject";
 import NewProject from "./NewProject";
 
-const MainSection = ({ newproject }) => {
-  const [projects, setProjects] = React.useState([
-    {
-      title: "Learn React",
-      description: "Learn react to get Job as developer",
-      date: 12,
-    },
-  ]);
-  const [selectedProject, setSelectedProject] = React.useState();
-
+const MainSection = ({ newproject, handleselectedproject, setNewProject }) => {
   return (
     <div className="w-full col-span-4">
-      {selectedProject || newproject ? <NewProject /> : <EmptyProject />}
+      {newproject ? (
+        <NewProject
+          setNewProject={setNewProject}
+          handleselectedproject={() => handleselectedproject()}
+        />
+      ) : (
+        <EmptyProject handleselectedproject={() => handleselectedproject()} />
+      )}
     </div>
   );
 };

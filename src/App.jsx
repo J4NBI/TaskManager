@@ -4,11 +4,21 @@ import MainSection from "./components/MainSection";
 import React from "react";
 
 function App() {
-  const [newProject, setNewProject] = React.useState(false);
+  //CLICK NEW PROJECT STATE
+  const [isProject, setIsProject] = React.useState(false);
+
+  //SAVED PROJECTS STATE
+  const [projects, setProjects] = React.useState([
+    { title: "Test", description: "Test description", date: "2026-01-18" },
+  ]);
+
+  // GET NEW PROJECT FROM NEWPROJECT COMPONENT
+  function setNewProject(wert) {
+    setProjects((prevProjects) => [...prevProjects, wert]);
+  }
 
   function handleSelectedProject() {
-    setNewProject(true);
-    console.log("Click");
+    setIsProject((prev) => !prev);
   }
 
   return (
@@ -17,9 +27,14 @@ function App() {
       <div className="grid grid-cols-6">
         <Sidebar
           handleselectedproject={handleSelectedProject}
-          newproject={newProject}
+          newproject={isProject}
+          projects={projects}
         />
-        <MainSection newproject={newProject} />
+        <MainSection
+          setNewProject={setNewProject}
+          handleselectedproject={handleSelectedProject}
+          newproject={isProject}
+        />
       </div>
     </div>
   );

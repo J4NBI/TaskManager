@@ -1,27 +1,66 @@
 import React from "react";
 import Button from "./Button";
 
-const NewProject = () => {
+const NewProject = ({ handleselectedproject, setNewProject }) => {
+  function sendProject(formData) {
+    let submitObject = Object.fromEntries(formData);
+    let title = formData.get("title");
+    let description = formData.get("description");
+    let date = formData.get("date");
+
+    let newProjectEntry = {
+      title: title,
+      description: description,
+      date: date,
+    };
+    setNewProject(newProjectEntry);
+  }
+
   return (
     <div className="ml-8 mr-20 flex flex-col items-left justify-center h-full gap-4 p-4">
       <div className="flex gap-4 ml-auto">
-        <button className="font-semibold hover:text-black/50">Cancel</button>
-        <button className="bg-black text-white/50 py-2 px-4 rounded-md hover:bg-black/40 hover:text-black transition duration-150 ease-in-out">
+        <button
+          onClick={handleselectedproject}
+          className="font-semibold hover:text-black/50 cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          form="projectForm"
+          className="bg-black text-white/50 py-2 px-4 rounded-md hover:bg-black/40 hover:text-black transition duration-150 ease-in-out cursor-pointer"
+        >
           Save
         </button>
       </div>
 
-      <form>
-        <label className="lab">TITLE</label>
-        <input type="text" className="customInput" />
+      <form id="projectForm" action={sendProject}>
+        <label htmlFor="title" className="lab">
+          TITLE
+        </label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          className="customInput"
+          required
+        />
 
-        <label className="lab">DESCRIPTION</label>
-        <textarea className="customInput" name="" id="" />
+        <label htmlFor="description" className="lab">
+          DESCRIPTION
+        </label>
+        <textarea className="customInput" name="description" id="description" />
 
         <label htmlFor="date" className="lab">
           DUE DATE
         </label>
-        <input type="date" id="date" className="customInput" />
+        <input
+          type="date"
+          id="date"
+          name="date"
+          className="customInput"
+          required
+        />
       </form>
     </div>
   );
