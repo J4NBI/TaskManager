@@ -12,7 +12,16 @@ const NewProject = () => {
       </div>
 
       <form>
-        <h2>Title</h2>
+        <label className="lab">TITLE</label>
+        <input type="text" className="customInput" />
+
+        <label className="lab">DESCRIPTION</label>
+        <textarea className="customInput" name="" id="" />
+
+        <label htmlFor="date" className="lab">
+          DUE DATE
+        </label>
+        <input type="date" id="date" className="customInput" />
       </form>
     </div>
   );
