@@ -17,7 +17,7 @@ const NewProject = ({ handleselectedproject, setNewProject }) => {
   }
 
   return (
-    <div className="ml-8 mr-20 flex flex-col items-left justify-center h-full gap-4 p-4">
+    <div className="container items-left">
       <div className="flex gap-4 ml-auto">
         <button
           onClick={handleselectedproject}
@@ -49,7 +49,12 @@ const NewProject = ({ handleselectedproject, setNewProject }) => {
         <label htmlFor="description" className="lab">
           DESCRIPTION
         </label>
-        <textarea className="customInput" name="description" id="description" />
+        <textarea
+          className="customInput"
+          name="description"
+          id="description"
+          rows="6"
+        />
 
         <label htmlFor="date" className="lab">
           DUE DATE

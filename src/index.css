@@ -9,4 +9,7 @@
       focus:border-black outline-none py-2 px-3
       leading-tight transition duration-200;
   }
+  .container {
+    @apply p-12 flex flex-col justify-center h-full gap-2;
+  }
 }

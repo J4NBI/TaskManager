@@ -11,26 +11,51 @@ function App() {
   const [projects, setProjects] = React.useState([
     { title: "Test", description: "Test description", date: "2026-01-18" },
   ]);
-
+  // SET IF PROJECT IS CLICKED SHOW PROJECT
+  const [showProject, setShowProject] = React.useState();
   // GET NEW PROJECT FROM NEWPROJECT COMPONENT
   function setNewProject(wert) {
-    setProjects((prevProjects) => [...prevProjects, wert]);
+    const newProjects = [...projects, wert];
+    setProjects(() => newProjects);
+    localStorage.setItem("savedProjects", JSON.stringify(newProjects));
   }
 
+  // SET IF IS NEW PROJECT CLICKED
   function handleSelectedProject() {
     setIsProject((prev) => !prev);
   }
 
+  // Show from index Project
+  function showProjectFromIndex(index) {
+    setIsProject(false);
+    const showIndexProject = projects.filter((p, i) => index === i);
+    setShowProject(showIndexProject);
+  }
+
+  // SHOW LOCALSTOREAGE PROJECTS
+  React.useEffect(() => {
+    const saved = localStorage.getItem("savedProjects");
+    // console.log(saved);
+    if (!saved) {
+      return;
+    }
+    setProjects(JSON.parse(saved));
+  }, []);
+  // SET LOCALSTORAGE DATA TO VALUES
+
   return (
-    <div className="h-full w-[100%]">
+    <div className="h-full w-full">
       <Navbar />
       <div className="grid grid-cols-6">
         <Sidebar
+          showProjectFromIndex={showProjectFromIndex}
           handleselectedproject={handleSelectedProject}
           newproject={isProject}
           projects={projects}
+          showProject={showProject}
         />
         <MainSection
+          showProject={showProject}
           setNewProject={setNewProject}
           handleselectedproject={handleSelectedProject}
           newproject={isProject}
