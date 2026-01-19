@@ -2,33 +2,52 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import MainSection from "./components/MainSection";
 import React from "react";
+import { useNavigate, Routes, Route } from "react-router-dom";
 
+/**
+ * Haupt-App-Komponente für das TaskManager-Projekt.
+ *
+ * Verwaltet den globalen State für Projekte, das aktuell ausgewählte Projekt,
+ * das Hinzufügen/Löschen von Projekten sowie das Routing.
+ *
+ * @returns {JSX.Element}
+ */
 function App() {
-  //CLICK NEW PROJECT STATE
-  const [isProject, setIsProject] = React.useState(false);
+  // Navigation hook
+  const navigate = useNavigate();
 
-  //SAVED PROJECTS STATE
+  // State if new project is clicked
+  const [isAddProject, setIsAddProject] = React.useState(false);
+  // SAVED PROJECTS STATE
   const [projects, setProjects] = React.useState([]);
-  // SET IF PROJECT IS CLICKED SHOW PROJECT
-  const [showProject, setShowProject] = React.useState();
-  // GET NEW PROJECT FROM NEWPROJECT COMPONENT
+  // SHOW CLICKED PROJECT
+  const [clickedProject, setClickedProject] = React.useState([]);
+
+  /**
+   * Fügt ein neues Projekt hinzu und speichert es im LocalStorage.
+   * @param {Object} wert - Das neue Projekt-Objekt.
+   */
   function setNewProject(wert) {
     const newProjects = [...projects, wert];
     setProjects(() => newProjects);
     localStorage.setItem("savedProjects", JSON.stringify(newProjects));
   }
 
-  // SET IF IS NEW PROJECT CLICKED
+  /**
+   * Handler für das Umschalten des "Neues Projekt"-Modus.
+   */
   function handleSelectedProject() {
-    setIsProject((prev) => !prev);
+    setIsAddProject((prev) => !prev);
   }
 
-  // Show from index Project
+  /**
+   * Zeigt ein Projekt anhand des Index an.
+   * @param {number} index - Index des anzuzeigenden Projekts.
+   */
   function showProjectFromIndex(index) {
-    setIsProject(false);
+    setIsAddProject(false);
     const showIndexProject = projects.filter((p, i) => index === i);
-    setShowProject((prev) => [showIndexProject, index]);
-    console.log(showProject);
+    setClickedProject((prev) => [showIndexProject, index]);
   }
 
   // SHOW LOCALSTOREAGE PROJECTS
@@ -47,10 +66,15 @@ function App() {
     localStorage.setItem("savedProjects", JSON.stringify(projects));
   }, [projects]);
 
-  // DELETE PROJECT
+  /**
+   * Löscht ein Projekt anhand des Index, setzt den State zurück und navigiert zur Startseite.
+   * @param {number} index - Index des zu löschenden Projekts.
+   */
   function deleteProject(index) {
     setProjects((prev) => prev.filter((p, i) => i !== index));
-    setIsProject(() => false);
+    setIsAddProject(false);
+    setClickedProject([]);
+    navigate("/");
   }
 
   return (
@@ -60,17 +84,24 @@ function App() {
         <Sidebar
           showProjectFromIndex={showProjectFromIndex}
           handleselectedproject={handleSelectedProject}
-          newproject={isProject}
+          isAddProject={isAddProject}
           projects={projects}
-          showProject={showProject}
+          clickedProject={clickedProject}
         />
-        <MainSection
-          showProject={showProject}
-          setNewProject={setNewProject}
-          handleselectedproject={handleSelectedProject}
-          newproject={isProject}
-          deleteProject={deleteProject}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainSection
+                clickedProject={clickedProject}
+                setNewProject={setNewProject}
+                handleselectedproject={handleSelectedProject}
+                isAddProject={isAddProject}
+                deleteProject={deleteProject}
+              />
+            }
+          />
+        </Routes>
       </div>
     </div>
   );

@@ -1,6 +1,14 @@
 import React from "react";
 import Button from "./Button";
 
+/**
+ * Komponente zum Erstellen eines neuen Projekts.
+ *
+ * @param {Object} props
+ * @param {Function} props.handleselectedproject - Handler zum Abbrechen.
+ * @param {Function} props.setNewProject - Funktion zum Hinzufügen eines neuen Projekts.
+ * @returns {JSX.Element}
+ */
 const NewProject = ({ handleselectedproject, setNewProject }) => {
   function sendProject(formData) {
     let submitObject = Object.fromEntries(formData);
