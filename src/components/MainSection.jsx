@@ -8,11 +8,12 @@ const MainSection = ({
   handleselectedproject,
   setNewProject,
   showProject,
+  deleteProject,
 }) => {
   return (
     <div className="w-full col-span-4">
-      {showProject && !newproject ? (
-        <ShowProject showProject={showProject} />
+      {showProject || !newproject ? (
+        <ShowProject showProject={showProject} deleteProject={deleteProject} />
       ) : newproject ? (
         <NewProject
           setNewProject={setNewProject}

@@ -8,9 +8,7 @@ function App() {
   const [isProject, setIsProject] = React.useState(false);
 
   //SAVED PROJECTS STATE
-  const [projects, setProjects] = React.useState([
-    { title: "Test", description: "Test description", date: "2026-01-18" },
-  ]);
+  const [projects, setProjects] = React.useState([]);
   // SET IF PROJECT IS CLICKED SHOW PROJECT
   const [showProject, setShowProject] = React.useState();
   // GET NEW PROJECT FROM NEWPROJECT COMPONENT
@@ -29,19 +27,31 @@ function App() {
   function showProjectFromIndex(index) {
     setIsProject(false);
     const showIndexProject = projects.filter((p, i) => index === i);
-    setShowProject(showIndexProject);
+    setShowProject((prev) => [showIndexProject, index]);
+    console.log(showProject);
   }
 
   // SHOW LOCALSTOREAGE PROJECTS
   React.useEffect(() => {
     const saved = localStorage.getItem("savedProjects");
-    // console.log(saved);
-    if (!saved) {
+    console.log(saved);
+    if (!saved || saved === undefined) {
       return;
+    } else {
+      setProjects(JSON.parse(saved));
     }
-    setProjects(JSON.parse(saved));
   }, []);
-  // SET LOCALSTORAGE DATA TO VALUES
+
+  // Save Local on project change
+  React.useEffect(() => {
+    localStorage.setItem("savedProjects", JSON.stringify(projects));
+  }, [projects]);
+
+  // DELETE PROJECT
+  function deleteProject(index) {
+    setProjects((prev) => prev.filter((p, i) => i !== index));
+    setIsProject(() => false);
+  }
 
   return (
     <div className="h-full w-full">
@@ -59,6 +69,7 @@ function App() {
           setNewProject={setNewProject}
           handleselectedproject={handleSelectedProject}
           newproject={isProject}
+          deleteProject={deleteProject}
         />
       </div>
     </div>

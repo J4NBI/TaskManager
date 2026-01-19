@@ -11,7 +11,7 @@ const Sidebar = ({
   ShowProject,
 }) => {
   return (
-    <div className="bg-black h-125 mt-8 rounded-r-md col-span-2 ">
+    <div className="bg-black min-h-125 mt-8 rounded-r-md col-span-2 ">
       <div className="mt-16 mx-8 mb-8">
         <h2 className="text-white text-2xl font-bold">YOUR PROJECTS</h2>
         {newproject && !ShowProject ? (
