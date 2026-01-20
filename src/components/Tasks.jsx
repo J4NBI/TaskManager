@@ -8,18 +8,20 @@ import React from "react";
  * @returns {JSX.Element}
  */
 const Task = ({ title }) => {
-  // Prüfe, ob schon eine Zufallszahl für dieses Projekt im LocalStorage ist
-  const getOrCreateRandom = () => {
+  // State für die randomNumber, die sich bei title-Änderung aktualisiert
+  const [randomNumber, setRandomNumber] = React.useState("");
+
+  // Bei Titeländerung: randomNumber aus LocalStorage holen oder neu erzeugen
+  React.useEffect(() => {
     const key = `${title}-random`;
     let random = localStorage.getItem(key);
     if (!random) {
       random = Math.floor(Math.random() * 1000000).toString();
       localStorage.setItem(key, random);
     }
-    return random;
-  };
+    setRandomNumber(random);
+  }, [title]);
 
-  const randomNumber = React.useRef(getOrCreateRandom());
   const [tasks, setTasks] = React.useState([]);
 
   function handleTaskFormSubmit(formdata) {
@@ -27,24 +29,34 @@ const Task = ({ title }) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   }
 
-  // Gespeicherte Tasks aus LocalStorage laden
+  // Gespeicherte Tasks aus LocalStorage laden, wenn title oder randomNumber sich ändern
   React.useEffect(() => {
-    const saved = localStorage.getItem(title + randomNumber.current);
+    if (!randomNumber) return;
+    setTasks([]);
+    const saved = localStorage.getItem(title + randomNumber);
     if (saved) {
       setTasks(JSON.parse(saved));
+    } else {
+      setTasks([]);
     }
-  }, [title]);
+  }, [title, randomNumber]);
 
   // Tasks speichern in LocalStorage
   React.useEffect(() => {
-    localStorage.setItem(title + randomNumber.current, JSON.stringify(tasks));
-  }, [tasks, title]);
+    if (!randomNumber) return;
+    localStorage.setItem(title + randomNumber, JSON.stringify(tasks));
+  }, [tasks, title, randomNumber]);
+
+  // Task löschen
+  function handleTaskDelete(index) {
+    setTasks((prevTasks) => prevTasks.filter((p, i) => i !== index));
+    localStorage.setItem(title + randomNumber, JSON.stringify(tasks));
+  }
 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4 mt-4">
-        Tasks{" "}
-        <span className="text-xs text-gray-500">#{randomNumber.current}</span>
+        Tasks <span className="text-xs text-gray-500">#{randomNumber}</span>
       </h2>
       <form className="flex items-center gap-2" action={handleTaskFormSubmit}>
         <input
@@ -66,7 +78,15 @@ const Task = ({ title }) => {
           key={index}
           className="mt-2 p-2 border border-gray-300 rounded-md bg-gray-200"
         >
-          {task}
+          <div className="flex justify-between items-center">
+            {task}
+            <button
+              onClick={() => handleTaskDelete(index)}
+              className="text-red-500 hover:text-red-700"
+            >
+              clear
+            </button>
+          </div>
         </div>
       ))}
     </div>
