@@ -53,7 +53,6 @@ function App() {
   // SHOW LOCALSTOREAGE PROJECTS
   React.useEffect(() => {
     const saved = localStorage.getItem("savedProjects");
-    console.log(saved);
     if (!saved || saved === undefined) {
       return;
     } else {

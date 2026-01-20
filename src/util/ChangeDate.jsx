@@ -6,5 +6,3 @@ export default function ChangeDate(dateString) {
     year: "numeric",
   });
 }
-
-console.log(ChangeDate("2026-01-04"));
