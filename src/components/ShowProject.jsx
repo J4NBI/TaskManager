@@ -1,4 +1,6 @@
 import React from "react";
+import ChangeDate from "../util/ChangeDate";
+import Tasks from "./Tasks";
 
 /**
  * Zeigt Details eines ausgewählten Projekts und einen Delete-Button.
@@ -10,6 +12,7 @@ import React from "react";
  */
 const ShowProject = ({ clickedProject, deleteProject }) => {
   const currentIndex = clickedProject[1];
+  const changeDateformat = clickedProject.date;
   return (
     <div className="container">
       <div className="flex justify-between">
@@ -24,9 +27,12 @@ const ShowProject = ({ clickedProject, deleteProject }) => {
         </button>
       </div>
       <p className="text-sm text-black/60">
-        {clickedProject.at(0)?.at(0)?.date}
+        {ChangeDate(clickedProject.at(0)?.at(0)?.date)}
       </p>
       <p>{clickedProject.at(0)?.at(0)?.description}</p>
+
+      <hr className="text-gray-500/40 border rounded-md" />
+      <Tasks title={clickedProject.at(0)?.at(0)?.title} />
     </div>
   );
 };
