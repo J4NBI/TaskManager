@@ -13,3 +13,7 @@
     @apply p-12 flex flex-col justify-center h-full gap-2;
   }
 }
+
+#root {
+  @apply min-h-screen;
+}

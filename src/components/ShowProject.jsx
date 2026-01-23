@@ -11,28 +11,24 @@ import Tasks from "./Tasks";
  * @returns {JSX.Element}
  */
 const ShowProject = ({ clickedProject, deleteProject }) => {
-  const currentIndex = clickedProject[1];
-  const changeDateformat = clickedProject.date;
   return (
     <div className="container">
       <div className="flex justify-between">
         <h1 className="text-4xl font bold">
-          {clickedProject.at(0)?.at(0)?.title ?? "Kein Titel"}
+          {clickedProject.title ?? "Kein Titel"}
         </h1>
         <button
-          onClick={() => deleteProject(currentIndex)}
+          onClick={() => deleteProject(clickedProject.id)}
           className="text-black/60 font-bold cursor-pointer"
         >
           Delete
         </button>
       </div>
-      <p className="text-sm text-black/60">
-        {ChangeDate(clickedProject.at(0)?.at(0)?.date)}
-      </p>
-      <p>{clickedProject.at(0)?.at(0)?.description}</p>
+      <p className="text-sm text-black/60">{ChangeDate(clickedProject.date)}</p>
+      <p>{clickedProject.description}</p>
 
       <hr className="text-gray-500/40 border rounded-md" />
-      <Tasks title={clickedProject.at(0)?.at(0)?.title} />
+      <Tasks projectId={clickedProject.id} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-export default function ChangeDate(dateString) {
+export default function changeDate(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
     month: "short",

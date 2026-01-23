@@ -21,22 +21,31 @@ const MainSection = ({
   clickedProject,
   deleteProject,
 }) => {
-  const isShowProject = clickedProject?.at(0)?.at(0)?.title !== undefined;
-  return (
-    <div className="w-full col-span-4">
-      {!isAddProject && isShowProject ? (
+  if (isAddProject) {
+    return (
+      <div className="w-full col-span-4">
+        <NewProject
+          setNewProject={setNewProject}
+          handleselectedproject={handleselectedproject}
+        />
+      </div>
+    );
+  }
+
+  if (clickedProject) {
+    return (
+      <div className="w-full col-span-4">
         <ShowProject
           clickedProject={clickedProject}
           deleteProject={deleteProject}
         />
-      ) : isAddProject ? (
-        <NewProject
-          setNewProject={setNewProject}
-          handleselectedproject={() => handleselectedproject()}
-        />
-      ) : (
-        <EmptyProject handleselectedproject={() => handleselectedproject()} />
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full col-span-4">
+      <EmptyProject handleselectedproject={handleselectedproject} />
     </div>
   );
 };

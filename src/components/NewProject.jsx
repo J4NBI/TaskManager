@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./Button";
 
 /**
  * Komponente zum Erstellen eines neuen Projekts.
@@ -10,19 +9,12 @@ import Button from "./Button";
  * @returns {JSX.Element}
  */
 const NewProject = ({ handleselectedproject, setNewProject }) => {
-  function sendProject(formData) {
-    let submitObject = Object.fromEntries(formData);
-    let title = formData.get("title");
-    let description = formData.get("description");
-    let date = formData.get("date");
-
-    let newProjectEntry = {
-      title: title,
-      description: description,
-      date: date,
-    };
-    setNewProject(newProjectEntry);
-  }
+  const sendProject = (formData) =>
+    setNewProject({
+      title: formData.get("title"),
+      description: formData.get("description"),
+      date: formData.get("date"),
+    });
 
   return (
     <div className="container items-left">
