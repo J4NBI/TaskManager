@@ -68,7 +68,11 @@ function App() {
    * @param {number} index - Index des zu löschenden Projekts.
    */
   function deleteProject(id) {
-    setProjects((prev) => prev.filter((p, i) => id !== p.id));
+    setProjects((prev) => {
+      const updatedProjects = prev.filter((p, i) => id !== p.id);
+      localStorage.setItem("savedProjects", JSON.stringify(updatedProjects));
+      return updatedProjects;
+    });
     setIsAddProject(() => false);
     setClickedProject(() => null);
   }
