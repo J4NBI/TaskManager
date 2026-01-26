@@ -2,15 +2,8 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import MainSection from "./components/MainSection";
 import React from "react";
+import { TaskContext } from "./store/task-context";
 
-/**
- * Haupt-App-Komponente für das TaskManager-Projekt.
- *
- * Verwaltet den globalen State für Projekte, das aktuell ausgewählte Projekt,
- * das Hinzufügen/Löschen von Projekten sowie das Routing.
- *
- * @returns {JSX.Element}
- */
 function App() {
   // State if new project is clicked
   const [isAddProject, setIsAddProject] = React.useState(false);
@@ -38,6 +31,7 @@ function App() {
    * Handler für das Umschalten des "Neues Projekt"-Modus.
    */
   function handleSelectedProject() {
+    console.log("Handle selected project called");
     if (isAddProject) {
       setClickedProject((_) => null);
     }
@@ -79,26 +73,31 @@ function App() {
     setClickedProject(() => null);
   }
 
+  const taskCtx = {
+    handleselectedproject: handleSelectedProject,
+    setNewProject: setNewProject,
+    clickedProject: clickedProject,
+    projectId: clickedProject ? clickedProject.id : null,
+  };
   return (
-    <div className="min-h-screen w-full flex flex-col">
-      <Navbar />
-      <div className="md:grid md:grid-cols-6 flex-1">
-        <Sidebar
-          showProjectFromIndex={showProjectFromIndex}
-          handleselectedproject={handleSelectedProject}
-          isAddProject={isAddProject}
-          projects={projects}
-          clickedProject={clickedProject}
-        />
-        <MainSection
-          clickedProject={clickedProject}
-          setNewProject={setNewProject}
-          handleselectedproject={handleSelectedProject}
-          isAddProject={isAddProject}
-          deleteProject={deleteProject}
-        />
+    <TaskContext.Provider value={taskCtx}>
+      <div className="min-h-screen w-full flex flex-col">
+        <Navbar />
+        <div className="md:grid md:grid-cols-6 flex-1">
+          <Sidebar
+            showProjectFromIndex={showProjectFromIndex}
+            isAddProject={isAddProject}
+            projects={projects}
+          />
+          <MainSection
+            setNewProject={setNewProject}
+            handleselectedproject={handleSelectedProject}
+            isAddProject={isAddProject}
+            deleteProject={deleteProject}
+          />
+        </div>
       </div>
-    </div>
+    </TaskContext.Provider>
   );
 }
 

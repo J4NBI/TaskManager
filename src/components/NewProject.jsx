@@ -7,8 +7,15 @@ import React from "react";
  * @param {Function} props.handleselectedproject - Handler zum Abbrechen.
  * @param {Function} props.setNewProject - Funktion zum Hinzufügen eines neuen Projekts.
  * @returns {JSX.Element}
+ *
  */
-const NewProject = ({ handleselectedproject, setNewProject }) => {
+
+import { TaskContext } from "../store/task-context";
+import { useContext } from "react";
+
+const NewProject = ({}) => {
+  const { handleselectedproject, setNewProject } = useContext(TaskContext);
+
   const sendProject = (formData) =>
     setNewProject({
       title: formData.get("title"),
