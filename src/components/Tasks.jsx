@@ -44,7 +44,7 @@ const Task = ({ projectId }) => {
       <h2 className="text-2xl font-bold mb-4 mt-4">Tasks</h2>
       <form className="flex items-center gap-2" action={handleTaskFormSubmit}>
         <input
-          className="border border-gray-300 rounded-md p-2 bg-gray-300 focus:border-gray-500 focus:ring-0 outline-none"
+          className="w-1/2 border border-gray-300 rounded-md p-2 bg-gray-300 focus:border-gray-500 focus:ring-0 outline-none"
           type="text"
           name="taskInput"
           placeholder="New Task"
@@ -52,7 +52,7 @@ const Task = ({ projectId }) => {
         />
         <button
           type="submit"
-          className="bg-gray-500 text-white rounded-md px-4 py-2 hover:text-black hover:opacity-80"
+          className="bg-gray-500 text-white rounded-md px-4 py-2 hover:text-black hover:opacity-80 flex-1 max-w-[100px]"
         >
           Add Task
         </button>
