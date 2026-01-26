@@ -80,7 +80,7 @@ function App() {
   return (
     <div className="min-h-screen w-full flex flex-col">
       <Navbar />
-      <div className="grid grid-cols-6 flex-1">
+      <div className="md:grid md:grid-cols-6 flex-1">
         <Sidebar
           showProjectFromIndex={showProjectFromIndex}
           handleselectedproject={handleSelectedProject}

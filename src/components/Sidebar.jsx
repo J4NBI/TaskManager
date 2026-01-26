@@ -21,8 +21,8 @@ const Sidebar = ({
   clickedProject,
 }) => {
   return (
-    <div className="bg-black min-h-125 mt-8 rounded-r-md col-span-2 ">
-      <div className="mt-16 mx-8 mb-8">
+    <div className="bg-black  md:mt-8 mb-12 rounded-r-md col-span-2 pb-12">
+      <div className="md:mt-16 mx-8 mb-8">
         <h2 className="text-white text-2xl font-bold">YOUR PROJECTS</h2>
         <button
           disabled={isAddProject}
@@ -37,7 +37,7 @@ const Sidebar = ({
           <div className="mt-2 px-8" key={index} id={index}>
             <button
               onClick={() => showProjectFromIndex(index)}
-              className="text-white cursor-pointer"
+              className="text-white cursor-pointer font-bold"
             >
               {project.title}
             </button>
