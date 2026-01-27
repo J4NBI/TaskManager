@@ -12,14 +12,10 @@ function App() {
   // SHOW CLICKED PROJECT
   const [clickedProject, setClickedProject] = React.useState();
 
-  /**
-   * Fügt ein neues Projekt hinzu und speichert es im LocalStorage.
-   * @param {Object} wert - Das neue Projekt-Objekt.
-   */
   function setNewProject(wert) {
     const newProject = {
       ...wert,
-      id: crypto.randomUUID(), // or Date.now().toString()
+      id: crypto.randomUUID(),
     };
     const newProjects = [...projects, newProject];
     setProjects(newProjects);
@@ -27,9 +23,6 @@ function App() {
     handleSelectedProject();
   }
 
-  /**
-   * Handler für das Umschalten des "Neues Projekt"-Modus.
-   */
   function handleSelectedProject() {
     console.log("Handle selected project called");
     if (isAddProject) {
@@ -38,10 +31,6 @@ function App() {
     setIsAddProject((prev) => !prev);
   }
 
-  /**
-   * Zeigt ein Projekt anhand des Index an.
-   * @param {number} index - Index des anzuzeigenden Projekts.
-   */
   function showProjectFromIndex(index) {
     setIsAddProject((_) => false);
     setClickedProject((_) => projects[index]);
@@ -57,10 +46,6 @@ function App() {
     setProjects(JSON.parse(saved));
   }, []);
 
-  /**
-   * Löscht ein Projekt anhand des Index, setzt den State zurück und navigiert zur Startseite.
-   * @param {number} index - Index des zu löschenden Projekts.
-   */
   function deleteProject(id) {
     localStorage.removeItem(`tasks-${id}`);
 

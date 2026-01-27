@@ -1,15 +1,5 @@
 import React from "react";
 
-/**
- * Komponente zum Erstellen eines neuen Projekts.
- *
- * @param {Object} props
- * @param {Function} props.handleselectedproject - Handler zum Abbrechen.
- * @param {Function} props.setNewProject - Funktion zum Hinzufügen eines neuen Projekts.
- * @returns {JSX.Element}
- *
- */
-
 import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 

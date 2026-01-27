@@ -1,12 +1,5 @@
 import React from "react";
 
-/**
- * Task-Komponente für Aufgabenverwaltung eines Projekts.
- *
- * @param {Object} props
- * @param {string} props.title - Titel des Projekts.
- * @returns {JSX.Element}
- */
 const Task = ({ projectId }) => {
   const [tasks, setTasks] = React.useState([]);
 
