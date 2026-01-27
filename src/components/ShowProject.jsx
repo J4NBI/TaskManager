@@ -33,13 +33,13 @@ const ShowProject = ({ deleteProject }) => {
             onClick={closeDialog}
             className="px-4 py-2 rounded-md bg-gray-300"
           >
-            Abbrechen
+            Cancel
           </button>
           <button
             onClick={confirmDelete}
             className="px-4 py-2 rounded-md bg-red-500 text-white"
           >
-            Löschen
+            Delete
           </button>
         </div>
       </dialog>
