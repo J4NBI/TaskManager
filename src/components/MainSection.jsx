@@ -5,6 +5,16 @@ import ShowProject from "./ShowProject";
 import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 
+/**
+ * Hauptbereich-Komponente, die je nach State EmptyProject, NewProject oder ShowProject anzeigt.
+ *
+ * @param {Object} props - Die Props der Komponente.
+ * @param {boolean} props.isAddProject - Gibt an, ob der "Add Project"-Modus aktiv ist.
+ * @param {Function} props.handleselectedproject - Handler zum Umschalten des Modus.
+ * @param {Function} props.setNewProject - Funktion zum Hinzufügen eines neuen Projekts.
+ * @param {Function} props.deleteProject - Funktion zum Löschen eines Projekts.
+ * @returns {JSX.Element}
+ */
 const MainSection = ({
   isAddProject,
   handleselectedproject,
@@ -16,10 +26,7 @@ const MainSection = ({
   if (isAddProject) {
     return (
       <div className="w-full col-span-4">
-        <NewProject
-          setNewProject={setNewProject}
-          handleselectedproject={handleselectedproject}
-        />
+        <NewProject />
       </div>
     );
   }
@@ -27,7 +34,7 @@ const MainSection = ({
   if (clickedProject) {
     return (
       <div className="w-full col-span-4">
-        <ShowProject deleteProject={deleteProject} />
+        <ShowProject />
       </div>
     );
   }

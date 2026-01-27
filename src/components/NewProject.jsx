@@ -3,7 +3,12 @@ import React from "react";
 import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 
-const NewProject = ({}) => {
+/**
+ * Komponente zum Erstellen eines neuen Projekts.
+ *
+ * @returns {JSX.Element}
+ */
+const NewProject = () => {
   const { handleselectedproject, setNewProject } = useContext(TaskContext);
 
   const sendProject = (formData) =>

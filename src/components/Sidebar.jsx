@@ -3,6 +3,15 @@ import ShowProject from "./ShowProject";
 import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 
+/**
+ * Sidebar-Komponente für die Anzeige der Projektliste und des "Add Project"-Buttons.
+ *
+ * @param {Object} props - Die Props der Komponente.
+ * @param {boolean} props.isAddProject - Gibt an, ob der "Add Project"-Modus aktiv ist.
+ * @param {Array} props.projects - Liste der Projekte.
+ * @param {Function} props.showProjectFromIndex - Funktion zum Anzeigen eines Projekts anhand des Index.
+ * @returns {JSX.Element}
+ */
 const Sidebar = ({ isAddProject, projects, showProjectFromIndex }) => {
   const taskCtx = useContext(TaskContext);
   const handleselectedproject = taskCtx.handleselectedproject;

@@ -3,6 +3,13 @@ import ChangeDate from "../util/ChangeDate";
 import Tasks from "./Tasks";
 import { TaskContext } from "../store/task-context";
 
+/**
+ * Komponente zur Anzeige eines ausgewählten Projekts mit Tasks und Löschoption.
+ *
+ * @param {Object} props - Die Props der Komponente.
+ * @param {Function} props.deleteProject - Funktion zum Löschen des Projekts.
+ * @returns {JSX.Element}
+ */
 const ShowProject = ({ deleteProject }) => {
   const taskCtx = useContext(TaskContext);
   const clickedProject = taskCtx.clickedProject;

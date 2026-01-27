@@ -1,6 +1,13 @@
 import React from "react";
 import { BsClipboard2Data } from "react-icons/bs";
 
+/**
+ * Komponente für den leeren Zustand, wenn kein Projekt ausgewählt ist.
+ *
+ * @param {Object} props - Die Props der Komponente.
+ * @param {Function} props.handleselectedproject - Handler zum Starten des "Add Project"-Modus.
+ * @returns {JSX.Element}
+ */
 const EmptyProject = ({ handleselectedproject }) => (
   <div className="h-full w-full flex flex-col gap-6 items-center justify-center">
     <BsClipboard2Data size={70} />
