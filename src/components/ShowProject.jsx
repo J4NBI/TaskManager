@@ -1,18 +1,20 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import ChangeDate from "../util/ChangeDate";
 import Tasks from "./Tasks";
 import { TaskContext } from "../store/task-context";
 
 /**
- * Komponente zur Anzeige eines ausgewählten Projekts mit Tasks und Löschoption.
+ * Komponente zur Anzeige eines ausgewählten Projekts.
  *
- * @param {Object} props - Die Props der Komponente.
- * @param {Function} props.deleteProject - Funktion zum Löschen des Projekts.
- * @returns {JSX.Element}
+ * Zeigt alle Projektdetails (Titel, Beschreibung, Datum) an und
+ * präsentiert eine Task-Liste. Enthält einen Delete-Button, der ein
+ * Bestätigungsdialog öffnet, bevor das Projekt gelöscht wird.
+ *
+ * @component
+ * @returns {JSX.Element} Die Projektansicht mit Task-Verwaltung und Delete-Dialog
  */
-const ShowProject = ({ deleteProject }) => {
-  const taskCtx = useContext(TaskContext);
-  const clickedProject = taskCtx.clickedProject;
+const ShowProject = () => {
+  const { clickedProject, deleteProject } = useContext(TaskContext);
   const dialogRef = useRef(null);
 
   function openDialog() {

@@ -1,20 +1,24 @@
 import { FaPlus } from "react-icons/fa";
-import ShowProject from "./ShowProject";
 import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 
 /**
- * Sidebar-Komponente für die Anzeige der Projektliste und des "Add Project"-Buttons.
+ * Sidebar-Komponente für die Anzeige der Projektliste.
  *
- * @param {Object} props - Die Props der Komponente.
- * @param {boolean} props.isAddProject - Gibt an, ob der "Add Project"-Modus aktiv ist.
- * @param {Array} props.projects - Liste der Projekte.
- * @param {Function} props.showProjectFromIndex - Funktion zum Anzeigen eines Projekts anhand des Index.
- * @returns {JSX.Element}
+ * Zeigt alle gespeicherten Projekte an und bietet einen Button zum Hinzufügen
+ * eines neuen Projekts. Der "Add Project"-Button ist deaktiviert, wenn sich
+ * die App bereits im "Add Project"-Modus befindet.
+ *
+ * @component
+ * @returns {JSX.Element} Die Sidebar mit Projektliste und Add-Button
  */
-const Sidebar = ({ isAddProject, projects, showProjectFromIndex }) => {
-  const taskCtx = useContext(TaskContext);
-  const handleselectedproject = taskCtx.handleselectedproject;
+const Sidebar = () => {
+  const {
+    handleselectedproject,
+    isAddProject,
+    projects,
+    showProjectFromIndex,
+  } = useContext(TaskContext);
 
   return (
     <div className="bg-black  md:mt-8 mb-12 rounded-r-md col-span-2 pb-12">

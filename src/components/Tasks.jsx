@@ -3,9 +3,14 @@ import React from "react";
 /**
  * Komponente zur Verwaltung von Tasks für ein bestimmtes Projekt.
  *
+ * Ermöglicht das Hinzufügen, Anzeigen und Löschen von Tasks.
+ * Tasks werden im localStorage unter dem Key "tasks-{projectId}" gespeichert
+ * und beim Komponenten-Mount oder bei projectId-Änderung geladen.
+ *
+ * @component
  * @param {Object} props - Die Props der Komponente.
- * @param {string} props.projectId - Die ID des Projekts, für das die Tasks verwaltet werden.
- * @returns {JSX.Element}
+ * @param {string} props.projectId - Die eindeutige ID des Projekts, für das die Tasks verwaltet werden.
+ * @returns {JSX.Element} Die Task-Verwaltungsansicht mit Formular und Task-Liste
  */
 const Task = ({ projectId }) => {
   const [tasks, setTasks] = React.useState([]);

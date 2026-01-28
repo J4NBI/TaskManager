@@ -6,7 +6,15 @@ import { useContext } from "react";
 /**
  * Komponente zum Erstellen eines neuen Projekts.
  *
- * @returns {JSX.Element}
+ * Präsentiert ein Formular mit Eingabefeldern für:
+ * - Titel des Projekts
+ * - Beschreibung
+ * - Fälligkeitsdatum
+ *
+ * Das Formular nutzt die HTML Form Action API zur Datenverarbeitung.
+ *
+ * @component
+ * @returns {JSX.Element} Das Projektformular mit Save und Cancel Buttons
  */
 const NewProject = () => {
   const { handleselectedproject, setNewProject } = useContext(TaskContext);

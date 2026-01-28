@@ -1,4 +1,3 @@
-import React from "react";
 import EmptyProject from "./EmptyProject";
 import NewProject from "./NewProject";
 import ShowProject from "./ShowProject";
@@ -6,23 +5,18 @@ import { TaskContext } from "../store/task-context";
 import { useContext } from "react";
 
 /**
- * Hauptbereich-Komponente, die je nach State EmptyProject, NewProject oder ShowProject anzeigt.
+ * Hauptbereich-Komponente mit bedingtem Rendering.
  *
- * @param {Object} props - Die Props der Komponente.
- * @param {boolean} props.isAddProject - Gibt an, ob der "Add Project"-Modus aktiv ist.
- * @param {Function} props.handleselectedproject - Handler zum Umschalten des Modus.
- * @param {Function} props.setNewProject - Funktion zum Hinzufügen eines neuen Projekts.
- * @param {Function} props.deleteProject - Funktion zum Löschen eines Projekts.
- * @returns {JSX.Element}
+ * Zeigt je nach State unterschiedliche Komponenten an:
+ * - NewProject: Wenn ein neues Projekt erstellt wird (isAddProject === true)
+ * - ShowProject: Wenn ein Projekt ausgewählt wurde (clickedProject existiert)
+ * - EmptyProject: Standard-Zustand, wenn nichts ausgewählt ist
+ *
+ * @component
+ * @returns {JSX.Element} Die entsprechende Komponente je nach State
  */
-const MainSection = ({
-  isAddProject,
-  handleselectedproject,
-  setNewProject,
-  deleteProject,
-}) => {
-  const taskCtx = useContext(TaskContext);
-  const clickedProject = taskCtx.clickedProject;
+const MainSection = () => {
+  const { isAddProject, clickedProject } = useContext(TaskContext);
   if (isAddProject) {
     return (
       <div className="w-full col-span-4">
@@ -41,7 +35,7 @@ const MainSection = ({
 
   return (
     <div className="w-full col-span-4">
-      <EmptyProject handleselectedproject={handleselectedproject} />
+      <EmptyProject />
     </div>
   );
 };
